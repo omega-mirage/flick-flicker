@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project OMEGA by Code Of Lies</title>
+ <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1 class="glitch" data-text="Project OMEGA by Code Of Lies" >Project OMEGA by Code Of Lies</h1><br>
+  <h1 class="glitch" data-text="Data is erasing , save it fast !">Data is erasing , save it fast !</h1>
+  
+  <div class="terminal" id="terminal">
+    <p>Initializing hack protocol...</p>
+  </div>
+  
+
+  <div style="text-align:center;">
+    <button class="flicker-button" onclick="simulateHack()">Flicker</button>
+    <button class="flicker-button" data-text="flicker-vault" onclick="resetHack()">Erase data </button>
+  </div>
+  
+  <script>
+    const terminal = document.getElementById('terminal');
+    let hackInterval;
+    
+    function simulateHack() {
+      clearInterval(hackInterval);
+      terminal.innerHTML = '<p>Initializing hack protocol...</p>';
+      hackInterval = setInterval(() => {
+        const randomText = generateRandomText();
+        const p = document.createElement('p');
+        p.textContent = randomText;
+        terminal.appendChild(p);
+        terminal.scrollTop = terminal.scrollHeight;
+        console.log(randomText);
+      }, 200);
+    }
+    
+    function resetHack() {
+      clearInterval(hackInterval);
+      terminal.innerHTML = '<p>Hack protocol reset.</p>';
+    }
+    
+    function generateRandomText() {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+      let text = '';
+      const length = Math.floor(Math.random() * 50) + 10;
+      for (let i = 0; i < length; i++) {
+        text += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return text;
+    }
+    
+    // Random popup generation for file deletion alerts
+    function createRandomPopup() {
+      const fileNames = ['system32.dll', 'boot.ini', 'config.sys', 'data.txt', 'secret.doc', 'passwords.csv', 'user.ini', 'registry.reg'];
+      const randomFile = fileNames[Math.floor(Math.random() * fileNames.length)];
+      const popup = document.createElement('div');
+      popup.className = 'popup';
+      popup.textContent = "Alert: " + randomFile + " deleted!";
+      // Random position within the viewport
+      const maxX = window.innerWidth - 150;
+      const maxY = window.innerHeight - 50;
+      popup.style.left = Math.floor(Math.random() * maxX) + 'px';
+      popup.style.top = Math.floor(Math.random() * maxY) + 'px';
+      document.body.appendChild(popup);
+      // Fade out and remove the popup after a delay
+      setTimeout(() => {
+        popup.style.opacity = '0';
+      }, 2000);
+      setTimeout(() => {
+        popup.remove();
+      }, 4000);
+    }
+    
+    // Schedule random popups at random intervals (1-3 seconds)
+    function scheduleRandomPopup() {
+      const delay = Math.floor(Math.random() * 2000) + 1000;
+      setTimeout(() => {
+        createRandomPopup();
+        scheduleRandomPopup();
+      }, delay);
+    }
+    
+    // Start random popups and hacking automatically on page load
+    scheduleRandomPopup();
+    simulateHack();
+    
+    console.log("Project OMEGA by Code Of Lies");
+  </script>
+</body>
+</html>
